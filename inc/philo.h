@@ -54,6 +54,16 @@ typedef enum e_timecode
 	MICROSECONDS,
 }	t_timecode;
 
+typedef enum e_philo_status
+{
+	EATING,
+	SLEEPING,
+	THINKING,
+	TAKING_FIRST_FORK,
+	TAKING_SECOND_FORK,
+	DYING,
+}	t_philo_status;
+
 typedef struct s_forks
 {
 	t_mtx	fork;
@@ -62,12 +72,14 @@ typedef struct s_forks
 
 typedef struct s_philo
 {
-	int		id;
-	long	meals_counter;
-	bool	is_full;
-	t_mtx	mutex;
-	t_fork	*first_fork;
-	t_fork	*second_fork;
+	int			id;
+	long		meals_counter;
+	long		last_meal_time;
+	bool		is_full;
+	pthread_t	thread_id;
+	t_mtx		mutex;
+	t_fork		*first_fork;
+	t_fork		*second_fork;
 }	t_philo;
 
 typedef struct s_simulation
@@ -83,6 +95,8 @@ typedef struct s_simulation
 	bool	threads_ready;
 	t_philo	*philos;
 	t_fork	*forks;
+	t_mtx	struct_mutex;
+	t_mtx	write_mutex;
 }	t_simulation;
 
 void	print_error(const char *msg, bool exit);
@@ -99,8 +113,15 @@ bool	get_bool(t_mtx *mutex, bool *var);
 void	set_bool(t_mtx *mutex, bool *dest, bool value);
 long	get_long(t_mtx *mutex, long *var);
 void	set_long(t_mtx *mutex, long *dest, long value);
+void	increase_long(t_mtx *mutex, long *value);
+bool	simulation_finished(t_simulation *simulation);
 
 void	setup_simulation(t_simulation *simulation);
 void	clean_simulation(t_simulation *simulation);
+
+void	run_simulation(t_simulation *simulation);
+
+void	write_action(t_philo_status status, t_simulation *simulation, \
+	t_philo *philo);
 
 #endif

@@ -25,7 +25,7 @@ time_sleep [num_eat]\n");
 	}
 	save_input(&simulation, argv);
 	setup_simulation(&simulation);
-	// run_simulation(&simulation);
+	run_simulation(&simulation);
 	clean_simulation(&simulation);
 	return (0);
 }

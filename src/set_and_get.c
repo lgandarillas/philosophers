@@ -45,3 +45,15 @@ void	set_long(t_mtx *mutex, long *dest, long value)
 	*dest = value;
 	solid_mutex(mutex, UNLOCK);
 }
+
+void	increase_long(t_mtx *mutex, long *value)
+{
+	solid_mutex(mutex, LOCK);
+	(*value)++;
+	solid_mutex(mutex, UNLOCK);
+}
+
+bool	simulation_finished(t_simulation *simulation)
+{
+	return (get_bool(&simulation->struct_mutex, &simulation->end));
+}

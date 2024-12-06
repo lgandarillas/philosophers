@@ -31,6 +31,8 @@ SRCS	= $(addprefix $(SRC_DIR),	\
 	solid_utils.c					\
 	time_utils.c					\
 	set_and_get.c					\
+	run_simulation.c				\
+	write_action.c					\
 	)
 
 OBJS	= $(SRCS:.c=.o)
