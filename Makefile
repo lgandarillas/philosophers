@@ -27,6 +27,7 @@ SRCS	= $(addprefix $(SRC_DIR),	\
 	print.c							\
 	input.c							\
 	setup_simulation.c				\
+	clean_simulation.c				\
 	solid_functions.c				\
 	time_utils.c					\
 	)

@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   clean_simulation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgandari <lgandari@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/06 11:49:30 by lgandari          #+#    #+#             */
-/*   Updated: 2024/12/06 13:13:22 by lgandari         ###   ########.fr       */
+/*   Created: 2024/12/06 17:06:34 by lgandari          #+#    #+#             */
+/*   Updated: 2024/12/06 17:06:44 by lgandari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-int	main(int argc, char **argv)
+void	clean_simulation(t_simulation *simulation)
 {
-	t_simulation	simulation;
+	// t_philo	*philo;
+	int		i;
 
-	if (argc == 5 || argc == 6)
+	i = -1;
+	while (++i < simulation->num_philos)
 	{
-		save_input(&simulation, argv);
-		setup_simulation(&simulation);
-		// execute_simulation(&simulation);
-		clean_simulation(&simulation);
+		// philo = simulation->philos + i;
+		// solid_mutex_handle(&philo->mutex, DESTROY);
 	}
-	else
-	{
-		print_error("[ERROR] : Wrong arguments.\n", false);
-		print_debug("Usage: ./philo num_philos time_die time_eat time_sleep");
-		print_debug("[num_eat]\n");
-		return (1);
-	}
-	return (0);
+	// solid_mutex_handle(&simulation->write_mutex, DESTROY);
+	// solid_mutex_handle(&simulation->mutex, DESTROY);
+	free(simulation->forks);
+	free(simulation->philos);
 }

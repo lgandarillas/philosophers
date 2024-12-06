@@ -56,6 +56,7 @@ typedef enum e_timecode
 
 typedef struct s_philo
 {
+	t_mtx	mutex;
 }	t_philo;
 
 typedef struct s_forks
@@ -92,5 +93,6 @@ long	get_long(t_mtx *mutex, long *var);
 void	set_long(t_mtx *mutex, long *dest, long value);
 
 void	setup_simulation(t_simulation *simulation);
+void	clean_simulation(t_simulation *simulation);
 
 #endif
