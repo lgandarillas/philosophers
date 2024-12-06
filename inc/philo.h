@@ -34,6 +34,19 @@
 # define CIAN	"\033[1;36m"
 # define WHITE	"\033[1;37m"
 
+typedef pthread_mutex_t	t_mtx;
+
+typedef enum e_threadop
+{
+	INIT,
+	LOCK,
+	UNLOCK,
+	JOIN,
+	DETACH,
+	CREATE,
+	DESTROY,
+}	t_threadop;
+
 typedef struct s_simulation
 {
 	long	num_philos;

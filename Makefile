@@ -26,6 +26,7 @@ SRCS	= $(addprefix $(SRC_DIR),	\
 	main.c							\
 	print.c							\
 	input.c							\
+	solid_functions.c				\
 	)
 
 OBJS	= $(SRCS:.c=.o)
