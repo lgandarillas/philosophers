@@ -21,10 +21,10 @@ void	clean_simulation(t_simulation *simulation)
 	while (++i < simulation->num_philos)
 	{
 		// philo = simulation->philos + i;
-		// solid_mutex_handle(&philo->mutex, DESTROY);
+		// solid_mutex(&philo->mutex, DESTROY);
 	}
-	// solid_mutex_handle(&simulation->write_mutex, DESTROY);
-	// solid_mutex_handle(&simulation->mutex, DESTROY);
+	// solid_mutex(&simulation->write_mutex, DESTROY);
+	// solid_mutex(&simulation->mutex, DESTROY);
 	free(simulation->forks);
 	free(simulation->philos);
 }

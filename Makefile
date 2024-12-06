@@ -24,12 +24,13 @@ SRC_DIR		= src/
 
 SRCS	= $(addprefix $(SRC_DIR),	\
 	main.c							\
-	print.c							\
-	input.c							\
+	print_utils.c					\
+	save_input.c					\
 	setup_simulation.c				\
 	clean_simulation.c				\
-	solid_functions.c				\
+	solid_utils.c					\
 	time_utils.c					\
+	set_and_get.c					\
 	)
 
 OBJS	= $(SRCS:.c=.o)

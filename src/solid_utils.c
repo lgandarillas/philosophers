@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   solid_functions.c                                  :+:      :+:    :+:   */
+/*   solid_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgandari <lgandari@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/06 15:11:22 by lgandari          #+#    #+#             */
-/*   Updated: 2024/12/06 15:13:07 by lgandari         ###   ########.fr       */
+/*   Created: 2024/12/06 19:14:48 by lgandari          #+#    #+#             */
+/*   Updated: 2024/12/06 19:14:53 by lgandari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	*solid_malloc(size_t bytes)
 	return (ret);
 }
 
-void	solid_mutex_handle(t_mtx *mutex, t_threadop threadop)
+void	solid_mutex(t_mtx *mutex, t_threadop threadop)
 {
 	int	status;
 
@@ -83,7 +83,7 @@ void	solid_mutex_handle(t_mtx *mutex, t_threadop threadop)
 		print_mutex_error(status, threadop);
 }
 
-void	solid_thread_handle(pthread_t *thread, void *(*thread_func)(void *), \
+void	solid_thread(pthread_t *thread, void *(*thread_func)(void *), \
 	void *arg, t_threadop threadop)
 {
 	int	status;
