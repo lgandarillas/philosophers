@@ -73,4 +73,9 @@ void	solid_thread_handle(pthread_t *thread, void *(*thread_func)(void *), \
 
 long	gettime(t_timecode time_code);
 
+bool	get_bool(t_mtx *mutex, bool *var);
+void	set_bool(t_mtx *mutex, bool *dest, bool value);
+long	get_long(t_mtx *mutex, long *var);
+void	set_long(t_mtx *mutex, long *dest, long value);
+
 #endif
