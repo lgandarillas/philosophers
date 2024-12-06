@@ -16,19 +16,16 @@ int	main(int argc, char **argv)
 {
 	t_simulation	simulation;
 
-	if (argc == 5 || argc == 6)
-	{
-		save_input(&simulation, argv);
-		setup_simulation(&simulation);
-		// execute_simulation(&simulation);
-		clean_simulation(&simulation);
-	}
-	else
+	if (argc != 5 && argc != 6)
 	{
 		print_error("[ERROR] : Wrong arguments.\n", false);
-		print_debug("Usage: ./philo num_philos time_die time_eat time_sleep");
-		print_debug("[num_eat]\n");
+		print_debug("Usage: ./philo num_philos time_die time_eat \
+time_sleep [num_eat]\n");
 		return (1);
 	}
+	save_input(&simulation, argv);
+	setup_simulation(&simulation);
+	// run_simulation(&simulation);
+	clean_simulation(&simulation);
 	return (0);
 }
