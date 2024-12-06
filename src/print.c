@@ -6,13 +6,13 @@
 /*   By: lgandari <lgandari@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 12:03:47 by lgandari          #+#    #+#             */
-/*   Updated: 2024/12/06 12:33:00 by lgandari         ###   ########.fr       */
+/*   Updated: 2024/12/06 13:08:29 by lgandari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-void	print_error(const char *msg)
+void	print_error(const char *msg, bool _exit)
 {
 	write(2, RED, sizeof(RED) - 1);
 	while (*msg != '\0')
@@ -21,6 +21,8 @@ void	print_error(const char *msg)
 		msg++;
 	}
 	write(2, RESET, sizeof(RESET) - 1);
+	if (_exit)
+		exit(EXIT_FAILURE);
 }
 
 void	print_debug(const char *msg)
@@ -33,4 +35,3 @@ void	print_debug(const char *msg)
 	}
 	write(1, RESET, sizeof(RESET) - 1);
 }
-

@@ -6,7 +6,7 @@
 /*   By: lgandari <lgandari@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 11:42:26 by lgandari          #+#    #+#             */
-/*   Updated: 2024/12/06 12:30:37 by lgandari         ###   ########.fr       */
+/*   Updated: 2024/12/06 13:08:02 by lgandari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@
 #define WHITE	"\033[1;37m"
 
 
-void	print_error(const char *msg);
+void	print_error(const char *msg, bool exit);
 void	print_debug(const char *msg);
 
