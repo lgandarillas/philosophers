@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgandari <lgandari@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/06 11:49:30 by lgandari          #+#    #+#             */
-/*   Updated: 2024/12/06 12:35:03 by lgandari         ###   ########.fr       */
+/*   Created: 2024/12/06 12:03:47 by lgandari          #+#    #+#             */
+/*   Updated: 2024/12/06 12:33:00 by lgandari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-int	main(int argc, char **argv)
+void	print_error(const char *msg)
 {
-	(void)argv;
-	if (argc == 5 || argc == 6)
-		;
-	else
+	write(2, RED, sizeof(RED) - 1);
+	while (*msg != '\0')
 	{
-		print_error("Wrong parameters.\n");
-		print_debug("Usage: ./philo num_philos time_die time_eat time_sleep [num_eat]\n");
-		return (1);
+		write(2, msg, 1);
+		msg++;
 	}
-	return (0);
+	write(2, RESET, sizeof(RESET) - 1);
 }
+
+void	print_debug(const char *msg)
+{
+	write(1, GRAY, sizeof(GRAY) - 1);
+	while (*msg != '\0')
+	{
+		write(1, msg, 1);
+		msg++;
+	}
+	write(1, RESET, sizeof(RESET) - 1);
+}
+
