@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgandari <lgandari@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/06 12:39:51 by lgandari          #+#    #+#             */
-/*   Updated: 2024/12/06 13:07:29 by lgandari         ###   ########.fr       */
+/*   Created: 2024/12/06 13:12:08 by lgandari          #+#    #+#             */
+/*   Updated: 2024/12/06 13:28:44 by lgandari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,24 @@ static long	ft_atol(const char *num_str)
 		num = (num * 10) + (*num_str++ - '0');
 	}
 	if (num > INT_MAX)
-	{
 		print_error("[ERROR] : Value bigger than INT_MAX\n", true);
-		exit(EXIT_FAILURE);
-	}
 	return (num);
+}
+
+void	save_input(t_simulation *simulation, char **argv)
+{
+	simulation->num_philos = ft_atol(argv[1]);
+	simulation->time_to_die = ft_atol(argv[2]) * 1e3;
+	simulation->time_to_eat = ft_atol(argv[3]) * 1e3;
+	simulation->time_to_sleep = ft_atol(argv[3]) * 1e3;
+	if (argv[5])
+		simulation->limit_meals = ft_atol(argv[5]);
+	else
+		simulation->limit_meals = -1;
+	if (simulation->num_philos == 0)
+		print_error("[ERROR] : Invalid simulation with 0 philos.\n", true);
+	if (simulation->time_to_die < 6 * 1e4 \
+		|| simulation->time_to_eat < 6 * 1e4 \
+		|| simulation->time_to_sleep < 6 * 1e4)
+		print_error("[ERROR] : Use timestamps bigger than 60ms.\n", true);
 }

@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   input.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgandari <lgandari@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/06 11:49:30 by lgandari          #+#    #+#             */
-/*   Updated: 2024/12/06 13:13:22 by lgandari         ###   ########.fr       */
+/*   Created: 2024/12/06 13:21:19 by lgandari          #+#    #+#             */
+/*   Updated: 2024/12/06 13:28:11 by lgandari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/philo.h"
+#ifndef INPUT_H
+# define INPUT_H
 
-int	main(int argc, char **argv)
-{
-	t_simulation	simulation;
+typedef struct s_simulation	t_simulation;
 
-	if (argc == 5 || argc == 6)
-	{
-		save_input(&simulation, argv);
-	}
-	else
-	{
-		print_error("[ERROR] : Wrong arguments.\n", false);
-		print_debug("Usage: ./philo num_philos time_die time_eat time_sleep");
-		print_debug("[num_eat]\n");
-		return (1);
-	}
-	return (0);
-}
+void	save_input(t_simulation *simulation, char **argv);
+
+#endif

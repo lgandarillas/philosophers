@@ -6,7 +6,7 @@
 #    By: lgandari <lgandari@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/06 11:50:22 by lgandari          #+#    #+#              #
-#    Updated: 2024/12/06 12:31:01 by lgandari         ###   ########.fr        #
+#    Updated: 2024/12/06 13:12:29 by lgandari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRC_DIR		= src/
 SRCS	= $(addprefix $(SRC_DIR),	\
 	main.c							\
 	print.c							\
+	input.c							\
 	)
 
 OBJS	= $(SRCS:.c=.o)
