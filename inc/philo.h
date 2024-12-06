@@ -59,4 +59,9 @@ typedef struct s_simulation
 void	print_error(const char *msg, bool exit);
 void	print_debug(const char *msg);
 
+void	*solid_malloc(size_t bytes);
+void	solid_mutex_handle(t_mtx *mutex, t_threadop threadop);
+void	solid_thread_handle(pthread_t *thread, void *(*thread_func)(void *), \
+	void *arg, t_threadop threadop);
+
 #endif
