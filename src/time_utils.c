@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   time_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgandari <lgandari@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/06 11:49:30 by lgandari          #+#    #+#             */
-/*   Updated: 2024/12/06 13:13:22 by lgandari         ###   ########.fr       */
+/*   Created: 2024/12/06 16:22:30 by lgandari          #+#    #+#             */
+/*   Updated: 2024/12/06 16:22:42 by lgandari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-int	main(int argc, char **argv)
+long	gettime(t_timecode time_code)
 {
-	t_simulation	simulation;
+	struct timeval	tv;
 
-	if (argc == 5 || argc == 6)
-	{
-		save_input(&simulation, argv);
-		//setup_simulation(&simulation);
-	}
+	if (gettimeofday(&tv, NULL))
+		print_error("[ERROR] : gettimeofday() failed.\n", true);
+	if (time_code == SECONDS)
+		return (tv.tv_sec + (tv.tv_usec / 1e3));
+	else if (time_code == MILLISECONDS)
+		return (tv.tv_sec * 1e3 + (tv.tv_usec / 1e3));
+	else if (time_code == MICROSECONDS)
+		return (tv.tv_sec * 1e3 + (tv.tv_usec));
 	else
-	{
-		print_error("[ERROR] : Wrong arguments.\n", false);
-		print_debug("Usage: ./philo num_philos time_die time_eat time_sleep");
-		print_debug("[num_eat]\n");
-		return (1);
-	}
+		print_error("[ERROR] : Wrong input to gettime().\n", true);
 	return (0);
 }

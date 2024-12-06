@@ -47,6 +47,13 @@ typedef enum e_threadop
 	DESTROY,
 }	t_threadop;
 
+typedef enum e_timecode
+{
+	SECONDS,
+	MILLISECONDS,
+	MICROSECONDS,
+}	t_timecode;
+
 typedef struct s_simulation
 {
 	long	num_philos;
@@ -63,5 +70,7 @@ void	*solid_malloc(size_t bytes);
 void	solid_mutex_handle(t_mtx *mutex, t_threadop threadop);
 void	solid_thread_handle(pthread_t *thread, void *(*thread_func)(void *), \
 	void *arg, t_threadop threadop);
+
+long	gettime(t_timecode time_code);
 
 #endif
