@@ -54,16 +54,21 @@ typedef enum e_timecode
 	MICROSECONDS,
 }	t_timecode;
 
-typedef struct s_philo
-{
-	t_mtx	mutex;
-}	t_philo;
-
 typedef struct s_forks
 {
 	t_mtx	fork;
 	int		id;
 }	t_fork;
+
+typedef struct s_philo
+{
+	int		id;
+	long	meals_counter;
+	bool	is_full;
+	t_mtx	mutex;
+	t_fork	*first_fork;
+	t_fork	*second_fork;
+}	t_philo;
 
 typedef struct s_simulation
 {
@@ -72,7 +77,10 @@ typedef struct s_simulation
 	long	time_to_eat;
 	long	time_to_sleep;
 	long	limit_meals;
+	long	start_time;
+	long	num_threads_running;
 	bool	end;
+	bool	threads_ready;
 	t_philo	*philos;
 	t_fork	*forks;
 }	t_simulation;
