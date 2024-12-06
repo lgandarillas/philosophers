@@ -6,7 +6,7 @@
 /*   By: lgandari <lgandari@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 11:42:26 by lgandari          #+#    #+#             */
-/*   Updated: 2024/12/06 13:27:25 by lgandari         ###   ########.fr       */
+/*   Updated: 2024/12/06 16:46:01 by lgandari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include "input.h"
 
 # define RESET	"\033[0m"
-# define RED		"\033[1;31m"
+# define RED	"\033[1;31m"
 # define GREEN	"\033[1;32m"
 # define GRAY	"\033[1;30m"
 # define YELLOW	"\033[1;33m"
@@ -54,6 +54,16 @@ typedef enum e_timecode
 	MICROSECONDS,
 }	t_timecode;
 
+typedef struct s_philo
+{
+}	t_philo;
+
+typedef struct s_forks
+{
+	t_mtx	fork;
+	int		id;
+}	t_fork;
+
 typedef struct s_simulation
 {
 	long	num_philos;
@@ -61,6 +71,9 @@ typedef struct s_simulation
 	long	time_to_eat;
 	long	time_to_sleep;
 	long	limit_meals;
+	bool	end;
+	t_philo	*philos;
+	t_fork	*forks;
 }	t_simulation;
 
 void	print_error(const char *msg, bool exit);
@@ -77,5 +90,7 @@ bool	get_bool(t_mtx *mutex, bool *var);
 void	set_bool(t_mtx *mutex, bool *dest, bool value);
 long	get_long(t_mtx *mutex, long *var);
 void	set_long(t_mtx *mutex, long *dest, long value);
+
+void	setup_simulation(t_simulation *simulation);
 
 #endif

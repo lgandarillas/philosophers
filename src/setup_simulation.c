@@ -12,7 +12,17 @@
 
 #include "../inc/philo.h"
 
-// void	setup_simulation(t_simulation *simulation)
-// {
-// 	;
-// }
+void	setup_simulation(t_simulation *simulation)
+{
+	int	i;
+
+	simulation->end = false;
+	simulation->philos = solid_malloc(sizeof(t_philo) * simulation->num_philos);
+	simulation->forks = solid_malloc(sizeof(t_fork) * simulation->num_philos);
+	i = -1;
+	while (++i < simulation->num_philos)
+	{
+		solid_mutex_handle(&simulation->forks[i].fork, INIT);
+		simulation->forks[i].id = i;
+	}
+}

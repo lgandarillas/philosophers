@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 	if (argc == 5 || argc == 6)
 	{
 		save_input(&simulation, argv);
-		//setup_simulation(&simulation);
+		setup_simulation(&simulation);
 	}
 	else
 	{
