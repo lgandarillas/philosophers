@@ -29,7 +29,7 @@ typedef pthread_mutex_t	t_mtx;
 typedef struct s_forks
 {
 	t_mtx	mutex;
-	int		id;
+	int		fork_id;
 }	t_fork;
 
 typedef struct s_philo
@@ -38,7 +38,7 @@ typedef struct s_philo
 	long				meals_counter;
 	long				last_meal_time;
 	bool				is_full;
-	pthread_t			thread_id;
+	pthread_t			pthread_id;
 	t_mtx				mutex;
 	t_fork				*first_fork;
 	t_fork				*second_fork;
