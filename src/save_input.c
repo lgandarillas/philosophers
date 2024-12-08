@@ -64,7 +64,7 @@ void	save_input(t_simulation *simulation, char **argv)
 	simulation->num_philos = ft_atol(argv[1]);
 	simulation->time_to_die = ft_atol(argv[2]) * 1e3;
 	simulation->time_to_eat = ft_atol(argv[3]) * 1e3;
-	simulation->time_to_sleep = ft_atol(argv[3]) * 1e3;
+	simulation->time_to_sleep = ft_atol(argv[4]) * 1e3;
 	if (argv[5])
 		simulation->limit_meals = ft_atol(argv[5]);
 	else
