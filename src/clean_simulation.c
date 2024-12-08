@@ -24,7 +24,7 @@ void	clean_simulation(t_simulation *simulation)
 		solid_mutex(&philo->mutex, DESTROY);
 	}
 	solid_mutex(&simulation->write_mutex, DESTROY);
-	solid_mutex(&simulation->struct_mutex, DESTROY);
+	solid_mutex(&simulation->mutex, DESTROY);
 	free(simulation->forks);
 	free(simulation->philos);
 }

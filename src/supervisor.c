@@ -46,18 +46,18 @@ void	*supervisor(void *arg)
 	int				i;
 
 	simulation = (t_simulation *)arg;
-	while (all_threads_running(&simulation->struct_mutex, \
+	while (all_threads_running(&simulation->mutex, \
 		&simulation->num_threads_running, simulation->num_philos == false))
 		;
-	while (get_bool(&simulation->struct_mutex, &simulation->end) == false)
+	while (get_bool(&simulation->mutex, &simulation->end) == false)
 	{
 		i = -1;
 		while (++i < simulation->num_philos && \
-			get_bool(&simulation->struct_mutex, &simulation->end) == false)
+			get_bool(&simulation->mutex, &simulation->end) == false)
 		{
 			if (philo_died(simulation->philos + i) == true)
 			{
-				set_bool(&simulation->struct_mutex, &simulation->end, true);
+				set_bool(&simulation->mutex, &simulation->end, true);
 				write_action(DYING, simulation, simulation->philos + i);
 			}
 		}

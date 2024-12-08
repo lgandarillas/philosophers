@@ -55,5 +55,5 @@ void	increase_long(t_mtx *mutex, long *value)
 
 bool	simulation_finished(t_simulation *simulation)
 {
-	return (get_bool(&simulation->struct_mutex, &simulation->end));
+	return (get_bool(&simulation->mutex, &simulation->end));
 }

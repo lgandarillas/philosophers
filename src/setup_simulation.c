@@ -62,7 +62,7 @@ void	setup_simulation(t_simulation *simulation)
 	i = -1;
 	while (++i < simulation->num_philos)
 	{
-		solid_mutex(&simulation->forks[i].fork, INIT);
+		solid_mutex(&simulation->forks[i].mutex, INIT);
 		simulation->forks[i].id = i;
 	}
 	setup_philos(simulation);
