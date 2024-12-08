@@ -34,7 +34,7 @@ static bool	philo_died(t_philo *philo)
 		return (false);
 	elapsed = gettime(MILLISECONDS) - \
 		get_long(&philo->mutex, &philo->last_meal_time);
-	time_to_die = philo->simulation->time_to_die / 1e3;
+	time_to_die = philo->simulation->time_to_die;
 	if (elapsed > time_to_die)
 		return (true);
 	return (false);
@@ -46,8 +46,8 @@ void	*supervisor(void *arg)
 	int				i;
 
 	simulation = (t_simulation *)arg;
-	while (all_threads_running(&simulation->mutex, \
-		&simulation->num_threads_running, simulation->num_philos == false))
+	while (!all_threads_running(&simulation->mutex, \
+		&simulation->num_threads_running, simulation->num_philos))
 		;
 	while (get_bool(&simulation->mutex, &simulation->end) == false)
 	{
