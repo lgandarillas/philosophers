@@ -54,3 +54,4 @@ dkms.conf
 # Project
 philo
 *.swp
+.vscode

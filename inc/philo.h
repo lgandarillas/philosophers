@@ -47,19 +47,20 @@ typedef struct s_philo
 
 typedef struct s_simulation
 {
-	long	num_philos;
-	long	time_to_die;
-	long	time_to_eat;
-	long	time_to_sleep;
-	long	limit_meals;
-	long	start_time;
-	long	num_threads_running;
-	bool	end;
-	bool	threads_ready;
-	t_philo	*philos;
-	t_fork	*forks;
-	t_mtx	mutex;
-	t_mtx	write_mutex;
+	long		num_philos;
+	long		time_to_die;
+	long		time_to_eat;
+	long		time_to_sleep;
+	long		limit_meals;
+	long		start_time;
+	long		num_threads_running;
+	bool		end;
+	bool		threads_ready;
+	t_philo		*philos;
+	t_fork		*forks;
+	t_mtx		mutex;
+	t_mtx		write_mutex;
+	pthread_t	pthread_supervisor;
 }	t_simulation;
 
 void	save_input(t_simulation *simulation, char **argv);
@@ -87,5 +88,7 @@ void	run_simulation(t_simulation *simulation);
 
 void	write_action(t_philo_status status, t_simulation *simulation, \
 	t_philo *philo);
+
+void	*supervisor(void *arg);
 
 #endif
