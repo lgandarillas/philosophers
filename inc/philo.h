@@ -34,14 +34,14 @@ typedef struct s_forks
 
 typedef struct s_philo
 {
-	int			id;
-	long		meals_counter;
-	long		last_meal_time;
-	bool		is_full;
-	pthread_t	thread_id;
-	t_mtx		mutex;
-	t_fork		*first_fork;
-	t_fork		*second_fork;
+	int					id;
+	long				meals_counter;
+	long				last_meal_time;
+	bool				is_full;
+	pthread_t			thread_id;
+	t_mtx				mutex;
+	t_fork				*first_fork;
+	t_fork				*second_fork;
 	struct s_simulation	*simulation;
 }	t_philo;
 
