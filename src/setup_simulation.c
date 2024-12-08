@@ -59,6 +59,8 @@ void	setup_simulation(t_simulation *simulation)
 	simulation->num_threads_running = 0;
 	simulation->philos = solid_malloc(sizeof(t_philo) * simulation->num_philos);
 	simulation->forks = solid_malloc(sizeof(t_fork) * simulation->num_philos);
+	solid_mutex(&simulation->mutex, INIT);
+	solid_mutex(&simulation->write_mutex, INIT);
 	i = -1;
 	while (++i < simulation->num_philos)
 	{
