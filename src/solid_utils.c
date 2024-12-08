@@ -14,24 +14,27 @@
 
 static void	print_mutex_error(int status, t_threadop threadop)
 {
-	if (status == EINVAL && threadop == LOCK)
-		print_error(MTX_FAIL_LOCK, true);
-	else if (status == EINVAL && threadop == UNLOCK)
-		print_error(MTX_FAIL_UNLOCK, true);
-	else if (status == EINVAL && threadop == INIT)
-		print_error(MTX_FAIL_INIT, true);
-	else if (status == EINVAL && threadop == DESTROY)
-		print_error(MTX_FAIL_DESTROY, true);
+	const char	*error_msg;
+
+	if (status == 0)
+		return ;
+	error_msg = NULL;
+	if (status == EINVAL)
+	{
+		if (threadop == LOCK || threadop == UNLOCK)
+			error_msg = MTX_FAIL_LOCK;
+		else if (threadop == INIT)
+			error_msg = MTX_FAIL_INIT;
+		else if (threadop == DESTROY)
+			error_msg = MTX_FAIL_DESTROY;
+	}
 	else if (status == EDEADLK)
-		print_error(PRINT_EDEADLK, true);
+		error_msg = PRINT_EDEADLK;
 	else if (status == EPERM)
-		print_error(PRINT_EPERM, true);
-	else if (status == ENOMEM)
-		print_error(PRINT_ENOMEM, true);
-	else if (status == EBUSY)
-		print_error(PRINT_EBUSY, true);
+		error_msg = PRINT_EPERM;
 	else
-		print_error(MTX_FAIL, true);
+		error_msg = MTX_FAIL;
+	print_error(error_msg, true);
 }
 
 static void	print_thread_error(int status)
