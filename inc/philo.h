@@ -22,7 +22,6 @@
 # include <limits.h>
 # include <errno.h>
 
-# include "input.h"
 # include "constants.h"
 
 typedef pthread_mutex_t	t_mtx;
@@ -62,6 +61,7 @@ typedef struct s_simulation
 	t_mtx	write_mutex;
 }	t_simulation;
 
+void	save_input(t_simulation *simulation, char **argv);
 void	print_error(const char *msg, bool exit);
 void	print_debug(const char *msg);
 
