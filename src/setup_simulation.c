@@ -45,6 +45,7 @@ static void	setup_philos(t_simulation *simulation)
 		philo->thread_id = 0;
 		solid_mutex(&philo->mutex, INIT);
 		assign_forks(simulation, i);
+		philo->simulation = simulation;
 	}
 }
 

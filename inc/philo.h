@@ -42,6 +42,7 @@ typedef struct s_philo
 	t_mtx		mutex;
 	t_fork		*first_fork;
 	t_fork		*second_fork;
+	struct s_simulation	*simulation;
 }	t_philo;
 
 typedef struct s_simulation
