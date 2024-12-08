@@ -17,7 +17,7 @@ void	write_action(t_philo_status status, t_simulation *simulation, \
 {
 	long	elapsed;
 
-	elapsed = gettime(MILLISECONDS) - (long)&simulation->start_time;
+	elapsed = gettime(MILLISECONDS) - simulation->start_time;
 	solid_mutex(&simulation->write_mutex, LOCK);
 	if ((status == TAKING_FIRST_FORK || status == TAKING_SECOND_FORK) \
 		&& !simulation_finished(simulation))
