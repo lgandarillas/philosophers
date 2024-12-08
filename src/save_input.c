@@ -33,14 +33,14 @@ static const char	*clean_input(const char *str)
 	if (*str == '+')
 		++str;
 	else if (*str == '-')
-		print_error("[ERROR] : Invalid input (negative number).\n", true);
+		print_error(INVALID_NEGATIVE, true);
 	if (!is_digit(*str))
-		print_error("[ERROR] : Not a valid input.\n", true);
+		print_error(INVALID_NOT_DIGIT, true);
 	num = str;
 	while (is_digit(*str++))
 		++len;
 	if (len > 10)
-		print_error("[ERROR] : Value bigger than INT_MAX\n", true);
+		print_error(INVALID_DATATYPE, true);
 	return (num);
 }
 
@@ -55,7 +55,7 @@ static long	ft_atol(const char *num_str)
 		num = (num * 10) + (*num_str++ - '0');
 	}
 	if (num > INT_MAX)
-		print_error("[ERROR] : Value bigger than INT_MAX\n", true);
+		print_error(INVALID_DATATYPE, true);
 	return (num);
 }
 
@@ -70,9 +70,9 @@ void	save_input(t_simulation *simulation, char **argv)
 	else
 		simulation->limit_meals = -1;
 	if (simulation->num_philos == 0)
-		print_error("[ERROR] : Invalid simulation with 0 philos.\n", true);
+		print_error(NO_PHILOSOPHERS, true);
 	if (simulation->time_to_die < 6 * 1e4 \
 		|| simulation->time_to_eat < 6 * 1e4 \
 		|| simulation->time_to_sleep < 6 * 1e4)
-		print_error("[ERROR] : Use timestamps bigger than 60ms.\n", true);
+		print_error(INVALID_TIMESTAMP, true);
 }

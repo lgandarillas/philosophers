@@ -14,44 +14,38 @@
 
 static void	print_mutex_error(int status, t_threadop threadop)
 {
-	if (status == EINVAL)
-	{
-		if (threadop == LOCK || threadop == UNLOCK)
-			print_error("[ERROR] : Mutex error.\n", true);
-		else if (threadop == INIT)
-			print_error("[ERROR] : Mutex initialization failed.\n", true);
-		else if (threadop == DESTROY)
-			print_error("[ERROR] : Mutex destruction failed.\n", true);
-	}
+	if (status == EINVAL && threadop == LOCK)
+		print_error(MTX_FAIL_LOCK, true);
+	else if (status == EINVAL && threadop == UNLOCK)
+		print_error(MTX_FAIL_UNLOCK, true);
+	else if (status == EINVAL && threadop == INIT)
+		print_error(MTX_FAIL_INIT, true);
+	else if (status == EINVAL && threadop == DESTROY)
+		print_error(MTX_FAIL_DESTROY, true);
 	else if (status == EDEADLK)
-		print_error("[ERROR] : EDEADLK, Deadlock detected.\n", true);
+		print_error(PRINT_EDEADLK, true);
 	else if (status == EPERM)
-		print_error("[ERROR] : EPERM, Opperation not permitted.\n", true);
+		print_error(PRINT_EPERM, true);
 	else if (status == ENOMEM)
-		print_error("[ERROR] : ENOMEM, Cannot allocate memory.\n", true);
+		print_error(PRINT_ENOMEM, true);
 	else if (status == EBUSY)
-		print_error("[ERROR] : EBUSY, Resource busy.\n", true);
+		print_error(PRINT_EBUSY, true);
 	else
-		print_error("[ERROR] : Unknown mutex error.\n", true);
+		print_error(MTX_FAIL, true);
 }
 
-static void	print_thread_error(int status, t_threadop threadop)
+static void	print_thread_error(int status)
 {
 	if (status == EAGAIN)
-		print_error("[ERROR] : EAGAIN, Insufficient resources.\n", true);
+		print_error(PRINT_EAGAIN, true);
 	else if (status == EPERM)
-		print_error("[ERROR] : EPERM, Permission denied.\n", true);
+		print_error(PRINT_EPERM, true);
 	else if (status == EINVAL)
-	{
-		if (threadop == CREATE)
-			print_error("[ERROR] : EINVAL, Invalid thread attributes.\n", true);
-		else if (threadop == JOIN || threadop == DETACH)
-			print_error("[ERROR] : EINVAL, Thread not joinable.\n", true);
-	}
+		print_error(PRINT_EINVAL, true);
 	else if (status == ESRCH)
-		print_error("[ERROR] : ESRCH, Thread ID not found.\n", true);
+		print_error(PRINT_ESRCH, true);
 	else if (status == EDEADLK)
-		print_error("[ERROR] : EDEADLK, Deadlock detected.\n", true);
+		print_error(PRINT_EDEADLK, true);
 }
 
 void	*solid_malloc(size_t bytes)
@@ -60,7 +54,7 @@ void	*solid_malloc(size_t bytes)
 
 	ret = malloc(bytes);
 	if (ret == NULL)
-		print_error("[ERROR] : Malloc failed.\n", true);
+		print_error(MALLOC_FAIL, true);
 	return (ret);
 }
 
@@ -78,7 +72,7 @@ void	solid_mutex(t_mtx *mutex, t_threadop threadop)
 	else if (threadop == DESTROY)
 		status = pthread_mutex_destroy(mutex);
 	else
-		print_error("[ERROR] : Wrong threadop for mutex handle.\n", true);
+		print_error(INVALID_THREAD_OP, true);
 	if (status != 0)
 		print_mutex_error(status, threadop);
 }
@@ -96,7 +90,7 @@ void	solid_thread(pthread_t *thread, void *(*thread_func)(void *), \
 	else if (threadop == DETACH)
 		status = pthread_detach(*thread);
 	else
-		print_error("[ERROR] : Wrong threadop for thread handle.\n", true);
+		print_error(INVALID_THREAD_OP, true);
 	if (status != 0)
-		print_thread_error(status, threadop);
+		print_thread_error(status);
 }

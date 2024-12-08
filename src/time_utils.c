@@ -17,7 +17,7 @@ long	gettime(t_timecode time_code)
 	struct timeval	tv;
 
 	if (gettimeofday(&tv, NULL))
-		print_error("[ERROR] : gettimeofday() failed.\n", true);
+		print_error(GETTIME_FAIL, true);
 	if (time_code == SECONDS)
 		return (tv.tv_sec + (tv.tv_usec / 1e3));
 	else if (time_code == MILLISECONDS)
@@ -25,6 +25,6 @@ long	gettime(t_timecode time_code)
 	else if (time_code == MICROSECONDS)
 		return (tv.tv_sec * 1e3 + (tv.tv_usec));
 	else
-		print_error("[ERROR] : Wrong input to gettime().\n", true);
+		print_error(INVALID_GETTIME_OP, true);
 	return (0);
 }

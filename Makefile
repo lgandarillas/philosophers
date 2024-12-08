@@ -16,7 +16,7 @@ RED		= \033[0;31m
 GREEN	= \033[0;32m
 NC		= \033[0m
 
-CFLAGS	= -Wall -Werror -Wextra
+CFLAGS	= -Wall -Werror -Wextra -Iinc
 CC		= cc
 RM		= rm -f
 

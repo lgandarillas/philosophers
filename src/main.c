@@ -16,12 +16,11 @@ int	main(int argc, char **argv)
 {
 	t_simulation	simulation;
 
-	if (argc != 5 && argc != 6)
+	if (argc != REQUIRED_ARGUMENTS && argc != OPTIONAL_ARGUMENTS)
 	{
-		print_error("[ERROR] : Wrong arguments.\n", false);
-		print_debug("Usage: ./philo num_philos time_die time_eat \
-time_sleep [num_eat]\n");
-		return (1);
+		print_error(INVALID_ARGUMENTS, false);
+		print_debug(USAGE);
+		return (42);
 	}
 	save_input(&simulation, argv);
 	setup_simulation(&simulation);
