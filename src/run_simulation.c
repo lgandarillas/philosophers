@@ -12,30 +12,12 @@
 
 #include "../inc/philo.h"
 
-static void	*single_philo(void *arg)
-{
-	t_simulation	*simulation;
-	t_philo			*philo;
-
-	simulation = (t_simulation *)arg;
-	philo = &simulation->philos[0];
-	while (!get_bool(&simulation->struct_mutex, &simulation->threads_ready))
-		;
-	set_long(&philo->mutex, &philo->last_meal_time, gettime(MILLISECONDS));
-	increase_long(&simulation->struct_mutex, &simulation->num_threads_running);
-	write_action(TAKING_FIRST_FORK, simulation, philo);
-	while (!simulation_finished(simulation))
-		usleep(200);
-	return (NULL);
-}
-
 void	run_simulation(t_simulation *simulation)
 {
 	if (simulation->limit_meals == 0)
 		return ;
 	else if (simulation->num_philos == 1)
-		solid_thread(&simulation->philos[0].thread_id, single_philo, \
-			&simulation, CREATE);
+		printf("One philo not implemented yet\n");
 	else
-		printf("HOLA\n");
+		printf("Multiple philos not implemented yet\n");
 }

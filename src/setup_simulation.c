@@ -42,6 +42,7 @@ static void	setup_philos(t_simulation *simulation)
 		philo->is_full = false;
 		philo->meals_counter = 0;
 		philo->last_meal_time = 0;
+		philo->thread_id = 0;
 		solid_mutex(&philo->mutex, INIT);
 		assign_forks(simulation, i);
 	}
