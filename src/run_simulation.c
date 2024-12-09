@@ -29,6 +29,38 @@ static void	*one_philo_routine(void *arg)
 	return (NULL);
 }
 
+static void	eat(t_philo *philo)
+{
+	t_simulation	*simulation;
+
+	simulation = philo->simulation;
+	solid_mutex(&philo->first_fork->mutex, LOCK);
+	write_action(TAKING_FIRST_FORK, simulation, philo);
+	solid_mutex(&philo->second_fork->mutex, LOCK);
+	write_action(TAKING_SECOND_FORK, simulation, philo);
+	set_long(&philo->mutex, &philo->last_meal_time, gettime(MILLISECONDS));
+	philo->meals_counter++;
+	write_action(EATING, simulation, philo);
+	usleep(simulation->time_to_eat);
+	solid_mutex(&philo->first_fork->mutex, UNLOCK);
+	solid_mutex(&philo->second_fork->mutex, UNLOCK);
+}
+
+static void	think(t_philo *philo)
+{
+	t_simulation	*simulation;
+	long			time_to_think;
+
+	simulation = philo->simulation;
+	write_action(THINKING, simulation, philo);
+	if (simulation->num_philos % 2 == 0)
+		return ;
+	time_to_think = simulation->time_to_eat - \
+		2 * simulation->time_to_sleep;
+	if (time_to_think < 0)
+		time_to_think = 0;
+}
+
 static void	*multiple_philo_routine(void *arg)
 {
 	t_simulation	*simulation;
@@ -46,10 +78,10 @@ static void	*multiple_philo_routine(void *arg)
 	{
 		if (philo->is_full)
 			break ;
-		eat(philo); // IMPLEMENTAR
+		eat(philo);
 		write_action(SLEEPING, simulation, philo);
 		usleep(simulation->time_to_sleep);
-		think(philo); // IMPLEMENTAR
+		think(philo);
 	}
 	return (NULL);
 }
