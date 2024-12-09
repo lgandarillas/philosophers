@@ -60,17 +60,10 @@ static void	*multiple_philo_routine(void *arg)
 
 void	run_simulation(t_simulation *simulation)
 {
-	long	start_time;
 	int		i;
 
 	if (simulation->limit_meals == 0)
 		return ;
-	start_time = gettime(MILLISECONDS);
-	set_long(&simulation->mutex, &simulation->start_time, start_time);
-	i = -1;
-	while (++i < simulation->num_philos)
-		set_long(&simulation->philos[i].mutex, \
-			&simulation->philos[i].last_meal_time, start_time);
 	if (simulation->num_philos == 1)
 	{
 		solid_thread(&simulation->philos[0].pthread_id, one_philo_routine, \
@@ -78,13 +71,13 @@ void	run_simulation(t_simulation *simulation)
 	}
 	else
 	{
-		;
 		i = -1;
 		while (++i < simulation->num_philos)
 			solid_thread(&simulation->philos[i].pthread_id, \
 				multiple_philo_routine, &simulation->philos[i], CREATE);
 	}
 	solid_thread(&simulation->pthread_supervisor, supervisor, simulation, CREATE);
+	simulation->start_time = gettime(MILLISECONDS);
 	set_bool(&simulation->mutex, &simulation->threads_ready, true);
 	i = -1;
 	while (++i < simulation->num_philos)

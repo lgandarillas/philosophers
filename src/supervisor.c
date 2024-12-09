@@ -49,19 +49,17 @@ void	*supervisor(void *arg)
 	while (!all_threads_running(&simulation->mutex, \
 		&simulation->num_threads_running, simulation->num_philos))
 		;
-	while (get_bool(&simulation->mutex, &simulation->end) == false)
+	while (!simulation_finished(simulation))
 	{
 		i = -1;
-		while (++i < simulation->num_philos && \
-			get_bool(&simulation->mutex, &simulation->end) == false)
+		while (++i < simulation->num_philos && !simulation_finished(simulation))
 		{
-			if (philo_died(simulation->philos + i) == true)
+			if (philo_died(simulation->philos + i))
 			{
 				set_bool(&simulation->mutex, &simulation->end, true);
 				write_action(DYING, simulation, simulation->philos + i);
 			}
 		}
-		usleep(100);
 	}
 	return (NULL);
 }
