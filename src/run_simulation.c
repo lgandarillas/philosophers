@@ -24,7 +24,7 @@ static void	*one_philo_routine(void *arg)
 	set_long(&philo->mutex, &philo->last_meal_time, gettime(MILLISECONDS));
 	increase_long(&simulation->mutex, &simulation->num_threads_running);
 	write_action(TAKING_FIRST_FORK, simulation, philo);
-	while (!simulation_finished(simulation)) // Se queda bloqueado aqui
+	while (!simulation_finished(simulation))
 		usleep(200);
 	return (NULL);
 }
@@ -39,7 +39,8 @@ static void	one_philo_simulation(t_simulation *simulation)
 	set_long(&simulation->mutex, &simulation->start_time, start_time);
 	set_long(&philo->mutex, &philo->last_meal_time, start_time);
 	solid_thread(&philo->pthread_id, one_philo_routine, philo, CREATE);
-	solid_thread(&simulation->pthread_supervisor, supervisor, simulation, CREATE);
+	solid_thread(&simulation->pthread_supervisor, \
+		supervisor, simulation, CREATE);
 	set_bool(&simulation->mutex, &simulation->threads_ready, true);
 	solid_thread(&philo->pthread_id, NULL, NULL, JOIN);
 	set_bool(&simulation->mutex, &simulation->end, true);
