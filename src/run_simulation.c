@@ -41,7 +41,7 @@ static void	eat(t_philo *philo)
 	set_long(&philo->mutex, &philo->last_meal_time, gettime(MILLISECONDS));
 	philo->meals_counter++;
 	write_action(EATING, simulation, philo);
-	usleep(simulation->time_to_eat);
+	usleep(simulation->time_to_eat * 1e3);
 	solid_mutex(&philo->first_fork->mutex, UNLOCK);
 	solid_mutex(&philo->second_fork->mutex, UNLOCK);
 }
@@ -80,7 +80,7 @@ static void	*multiple_philo_routine(void *arg)
 			break ;
 		eat(philo);
 		write_action(SLEEPING, simulation, philo);
-		usleep(simulation->time_to_sleep);
+		usleep(simulation->time_to_sleep * 1e3);
 		think(philo);
 	}
 	return (NULL);
