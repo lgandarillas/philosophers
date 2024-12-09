@@ -29,30 +29,41 @@ static void	*one_philo_routine(void *arg)
 	return (NULL);
 }
 
-static void	one_philo_simulation(t_simulation *simulation)
-{
-	t_philo	*philo;
-	long	start_time;
-
-	philo = &simulation->philos[0];
-	start_time = gettime(MILLISECONDS);
-	set_long(&simulation->mutex, &simulation->start_time, start_time);
-	set_long(&philo->mutex, &philo->last_meal_time, start_time);
-	solid_thread(&philo->pthread_id, one_philo_routine, philo, CREATE);
-	solid_thread(&simulation->pthread_supervisor, \
-		supervisor, simulation, CREATE);
-	set_bool(&simulation->mutex, &simulation->threads_ready, true);
-	solid_thread(&philo->pthread_id, NULL, NULL, JOIN);
-	set_bool(&simulation->mutex, &simulation->end, true);
-	solid_thread(&simulation->pthread_supervisor, NULL, NULL, JOIN);
-}
+// NEW
 
 void	run_simulation(t_simulation *simulation)
 {
+	long	start_time;
+	int		i;
+
 	if (simulation->limit_meals == 0)
 		return ;
-	else if (simulation->num_philos == 1)
-		one_philo_simulation(simulation);
+	start_time = gettime(MILLISECONDS);
+	set_long(&simulation->mutex, &simulation->start_time, start_time);
+	i = -1;
+	while (++i < simulation->num_philos)
+		set_long(&simulation->philos[i].mutex, \
+			&simulation->philos[i].last_meal_time, start_time);
+	if (simulation->num_philos == 1)
+	{
+		solid_thread(&simulation->philos[0].pthread_id, one_philo_routine, \
+			&simulation->philos[0], CREATE);
+	}
 	else
-		printf("Multiple philos not implemented yet\n");
+	{
+		;
+		/*
+		i = -1;
+		while (++i < simulation->num_philos)
+			solid_thread(&simulation->philos[i].pthread_id, \
+				multiple_philo_routine, &simulation->philos[i], CREATE);
+		*/
+	}
+	solid_thread(&simulation->pthread_supervisor, supervisor, simulation, CREATE);
+	set_bool(&simulation->mutex, &simulation->threads_ready, true);
+	i = -1;
+	while (++i < simulation->num_philos)
+		solid_thread(&simulation->philos[i].pthread_id, NULL, NULL, JOIN);
+	set_bool(&simulation->mutex, &simulation->end, true);
+	solid_thread(&simulation->pthread_supervisor, NULL, NULL, JOIN);
 }

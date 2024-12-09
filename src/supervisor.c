@@ -61,6 +61,7 @@ void	*supervisor(void *arg)
 				write_action(DYING, simulation, simulation->philos + i);
 			}
 		}
+		usleep(100);
 	}
 	return (NULL);
 }
