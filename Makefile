@@ -51,7 +51,7 @@ mem: CFLAGS += -g3 -O2 -fsanitize=address
 mem: fclean $(NAME)
 	@echo "$(GREEN)Compiling philo with AddressSanitizer...$(NC)"
 
-thread: CFLAGS += -g3 -fsanitize=thread -pthread
+thread: CFLAGS += -fsanitize=thread -g -O1
 thread: fclean $(NAME)
 	@echo "$(GREEN)Compiling philo with ThreadSanitizer...$(NC)"
 
