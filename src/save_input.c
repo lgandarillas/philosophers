@@ -62,17 +62,17 @@ static long	ft_atol(const char *num_str)
 void	save_input(t_simulation *simulation, char **argv)
 {
 	simulation->num_philos = ft_atol(argv[1]);
-	simulation->time_to_die = ft_atol(argv[2]) * 1e3;
-	simulation->time_to_eat = ft_atol(argv[3]) * 1e3;
-	simulation->time_to_sleep = ft_atol(argv[4]) * 1e3;
+	simulation->time_to_die = ft_atol(argv[2]);
+	simulation->time_to_eat = ft_atol(argv[3]);
+	simulation->time_to_sleep = ft_atol(argv[4]);
 	if (argv[5])
 		simulation->limit_meals = ft_atol(argv[5]);
 	else
 		simulation->limit_meals = -1;
 	if (simulation->num_philos == 0)
 		print_error(NO_PHILOSOPHERS, true);
-	if (simulation->time_to_die < 6 * 1e4 \
-		|| simulation->time_to_eat < 6 * 1e4 \
-		|| simulation->time_to_sleep < 6 * 1e4)
+	if (simulation->time_to_die < 60 \
+		|| simulation->time_to_eat < 60 \
+		|| simulation->time_to_sleep < 60)
 		print_error(INVALID_TIMESTAMP, true);
 }
