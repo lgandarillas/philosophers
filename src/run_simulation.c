@@ -31,6 +31,33 @@ static void	*one_philo_routine(void *arg)
 
 // NEW
 
+static void	*multiple_philo_routine(void *arg)
+{
+	t_simulation	*simulation;
+	t_philo			*philo;
+
+	philo = (t_philo *)arg;
+	simulation = philo->simulation;
+	if (philo->id % 2 == 1)
+		usleep(100);
+	while (!simulation_finished(simulation))
+	{
+		write_action(THINKING, simulation, philo);
+		solid_mutex(&philo->first_fork->mutex, LOCK);
+		write_action(TAKING_FIRST_FORK, simulation, philo);
+		solid_mutex(&philo->second_fork->mutex, LOCK);
+		write_action(TAKING_SECOND_FORK, simulation, philo);
+		write_action(EATING, simulation, philo);
+		set_long(&philo->mutex, &philo->last_meal_time, gettime(MILLISECONDS));
+		usleep(simulation->time_to_eat);
+		solid_mutex(&philo->second_fork->mutex, UNLOCK);
+		solid_mutex(&philo->first_fork->mutex, UNLOCK);
+		write_action(SLEEPING, simulation, philo);
+		usleep(simulation->time_to_sleep);
+	}
+	return (NULL);
+}
+
 void	run_simulation(t_simulation *simulation)
 {
 	long	start_time;
@@ -52,12 +79,10 @@ void	run_simulation(t_simulation *simulation)
 	else
 	{
 		;
-		/*
 		i = -1;
 		while (++i < simulation->num_philos)
 			solid_thread(&simulation->philos[i].pthread_id, \
 				multiple_philo_routine, &simulation->philos[i], CREATE);
-		*/
 	}
 	solid_thread(&simulation->pthread_supervisor, supervisor, simulation, CREATE);
 	set_bool(&simulation->mutex, &simulation->threads_ready, true);
