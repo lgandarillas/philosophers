@@ -23,12 +23,12 @@ void	write_action(t_philo_status status, t_simulation *simulation, \
 		&& !simulation_finished(simulation))
 		printf("%-6ld %d has taken a fork\n", elapsed, philo->id);
 	else if (status == EATING && !simulation_finished(simulation))
-		printf("%-6ld %d is eating\n", elapsed, philo->id);
+		printf(GREEN"%-6ld %d is eating\n"RESET, elapsed, philo->id);
 	else if (status == SLEEPING && !simulation_finished(simulation))
-		printf("%-6ld %d is sleeping\n", elapsed, philo->id);
+		printf(BLUE"%-6ld %d is sleeping\n"RESET, elapsed, philo->id);
 	else if (status == THINKING && !simulation_finished(simulation))
-		printf("%-6ld %d is thinking\n", elapsed, philo->id);
+		printf(CIAN"%-6ld %d is thinking\n"RESET, elapsed, philo->id);
 	else if (status == DYING)
-		printf("%-6ld %d died\n", elapsed, philo->id);
+		printf(RED"%-6ld %d died\n"RESET, elapsed, philo->id);
 	solid_mutex(&simulation->write_mutex, UNLOCK);
 }
