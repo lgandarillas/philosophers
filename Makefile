@@ -47,7 +47,7 @@ clean:
 	@$(RM) $(OBJS)
 	@echo "$(RED)All Objs Deleted.$(NC)"
 
-mem: CFLAGS += -g3 -fsanitize=address
+mem: CFLAGS += -g3 -O2 -fsanitize=address
 mem: fclean $(NAME)
 	@echo "$(GREEN)Compiling philo with AddressSanitizer...$(NC)"
 
