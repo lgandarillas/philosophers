@@ -56,9 +56,10 @@ static void	think(t_philo *philo)
 	if (simulation->num_philos % 2 == 0)
 		return ;
 	time_to_think = simulation->time_to_eat - \
-		2 * simulation->time_to_sleep;
+		4 * simulation->time_to_sleep;
 	if (time_to_think < 0)
-		time_to_think = 0;
+		time_to_think = simulation->time_to_sleep / 8;
+	usleep(time_to_think * 1e3);
 }
 
 static void	*multiple_philo_routine(void *arg)
