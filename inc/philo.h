@@ -72,7 +72,7 @@ void	solid_mutex(t_mtx *mutex, t_threadop threadop);
 void	solid_thread(pthread_t *thread, void *(*thread_func)(void *), \
 	void *arg, t_threadop threadop);
 
-long	gettime(t_timecode time_code);
+long	gettime_millis(void);
 
 bool	get_bool(t_mtx *mutex, bool *var);
 void	set_bool(t_mtx *mutex, bool *dest, bool value);

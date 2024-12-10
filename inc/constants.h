@@ -51,8 +51,8 @@ time_sleep [num_eat]\n"
 # define PRINT_ESRCH		"[ERROR] : ESRCH, Thread ID not found.\n"
 # define MALLOC_FAIL		"[ERROR] : Malloc failed.\n"
 # define INVALID_THREAD_OP	"[ERROR] : Invalid thread operation.\n"
-# define INVALID_GETTIME_OP	"[ERROR] : Invalid code for gettime().\n"
-# define GETTIME_FAIL		"[ERROR] : gettime() failed.\n"
+# define INVALID_GETTIME_OP	"[ERROR] : Invalid code for gettime_millis().\n"
+# define GETTIME_FAIL		"[ERROR] : gettime_millis() failed.\n"
 
 typedef enum e_threadop
 {
@@ -64,13 +64,6 @@ typedef enum e_threadop
 	CREATE,
 	DESTROY,
 }	t_threadop;
-
-typedef enum e_timecode
-{
-	SECONDS,
-	MILLISECONDS,
-	MICROSECONDS,
-}	t_timecode;
 
 typedef enum e_philo_status
 {

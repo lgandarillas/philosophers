@@ -55,7 +55,7 @@ void	setup_simulation(t_simulation *simulation)
 
 	simulation->end = false;
 	simulation->threads_ready = false;
-	simulation->start_time = gettime(MILLISECONDS);
+	simulation->start_time = gettime_millis();
 	simulation->num_threads_running = 0;
 	simulation->philos = solid_malloc(sizeof(t_philo) * simulation->num_philos);
 	simulation->forks = solid_malloc(sizeof(t_fork) * simulation->num_philos);

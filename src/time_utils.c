@@ -12,19 +12,11 @@
 
 #include "../inc/philo.h"
 
-long	gettime(t_timecode time_code)
+long	gettime_millis(void)
 {
 	struct timeval	tv;
 
 	if (gettimeofday(&tv, NULL))
 		print_error(GETTIME_FAIL, true);
-	if (time_code == SECONDS)
-		return (tv.tv_sec);
-	else if (time_code == MILLISECONDS)
-		return (tv.tv_sec * 1e3 + tv.tv_usec / 1e3);
-	else if (time_code == MICROSECONDS)
-		return (tv.tv_sec * 1e6 + tv.tv_usec);
-	else
-		print_error(INVALID_GETTIME_OP, true);
-	return (0);
+	return (tv.tv_sec * 1e3 + tv.tv_usec / 1e3);
 }

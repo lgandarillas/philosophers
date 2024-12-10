@@ -32,7 +32,7 @@ static bool	philo_died(t_philo *philo)
 
 	if (get_bool(&philo->mutex, &philo->is_full) == true)
 		return (false);
-	elapsed = gettime(MILLISECONDS) - \
+	elapsed = gettime_millis() - \
 		get_long(&philo->mutex, &philo->last_meal_time);
 	time_to_die = philo->simulation->time_to_die;
 	if (elapsed > time_to_die)
