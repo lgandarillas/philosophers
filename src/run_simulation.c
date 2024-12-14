@@ -39,7 +39,7 @@ static void	eat(t_philo *philo)
 	solid_mutex(&philo->second_fork->mutex, LOCK);
 	print_action(TAKING_SECOND_FORK, simulation, philo);
 	set_long(&philo->mutex, &philo->last_meal_time, gettime_millis());
-	philo->meals_counter++;
+	increase_long(&philo->mutex, &philo->meals_counter);
 	print_action(EATING, simulation, philo);
 	usleep(simulation->time_to_eat * 1e3);
 	solid_mutex(&philo->first_fork->mutex, UNLOCK);
