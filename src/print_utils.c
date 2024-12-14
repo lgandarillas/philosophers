@@ -20,13 +20,16 @@ void	print_action(t_philaction status, t_simulation *simulation, \
 	elapsed = gettime_millis() - simulation->start_time;
 	solid_mutex(&simulation->write_mutex, LOCK);
 	if ((status == TAKING_FIRST_FORK || status == TAKING_SECOND_FORK) \
-		&& !simulation_finished(simulation))
+		&& !get_bool(&simulation->mutex, &simulation->end))
 		printf("%-6ld %d has taken a fork\n", elapsed, philo->id);
-	else if (status == EATING && !simulation_finished(simulation))
+	else if (status == EATING && \
+		!get_bool(&simulation->mutex, &simulation->end))
 		printf(GREEN"%-6ld %d is eating\n"RESET, elapsed, philo->id);
-	else if (status == SLEEPING && !simulation_finished(simulation))
+	else if (status == SLEEPING && \
+		!get_bool(&simulation->mutex, &simulation->end))
 		printf(BLUE"%-6ld %d is sleeping\n"RESET, elapsed, philo->id);
-	else if (status == THINKING && !simulation_finished(simulation))
+	else if (status == THINKING && \
+		!get_bool(&simulation->mutex, &simulation->end))
 		printf(CIAN"%-6ld %d is thinking\n"RESET, elapsed, philo->id);
 	else if (status == DYING)
 		printf(RED"%-6ld %d died\n"RESET, elapsed, philo->id);

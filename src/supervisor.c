@@ -56,16 +56,32 @@ static bool	philo_died(t_philo *philo)
 	return (false);
 }
 
+static void	check_philos_alive(t_simulation *simulation)
+{
+	int	i;
+
+	i = -1;
+	while (++i < simulation->num_philos && \
+		!get_bool(&simulation->mutex, &simulation->end))
+	{
+		if (philo_died(simulation->philos + i))
+		{
+			set_bool(&simulation->mutex, &simulation->end, true);
+			print_action(DYING, simulation, simulation->philos + i);
+			break ;
+		}
+	}
+}
+
 void	*supervisor(void *arg)
 {
 	t_simulation	*simulation;
-	int				i;
 
 	simulation = (t_simulation *)arg;
 	while (!all_threads_running(&simulation->mutex, \
 		&simulation->num_threads_running, simulation->num_philos))
 		usleep(100);
-	while (!simulation_finished(simulation))
+	while (!get_bool(&simulation->mutex, &simulation->end))
 	{
 		if (simulation->limit_meals > 0 && all_philos_full(simulation))
 		{
@@ -73,16 +89,7 @@ void	*supervisor(void *arg)
 			set_bool(&simulation->mutex, &simulation->end, true);
 			break ;
 		}
-		i = -1;
-		while (++i < simulation->num_philos && !simulation_finished(simulation))
-		{
-			if (philo_died(simulation->philos + i))
-			{
-				set_bool(&simulation->mutex, &simulation->end, true);
-				print_action(DYING, simulation, simulation->philos + i);
-				break ;
-			}
-		}
+		check_philos_alive(simulation);
 	}
 	return (NULL);
 }

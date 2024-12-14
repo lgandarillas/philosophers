@@ -89,7 +89,6 @@ void	set_bool(t_mtx *mutex, bool *dest, bool value);
 long	get_long(t_mtx *mutex, long *var);
 void	set_long(t_mtx *mutex, long *dest, long value);
 void	increase_long(t_mtx *mutex, long *value);
-bool	simulation_finished(t_simulation *simulation);
 
 void	*supervisor(void *arg);
 

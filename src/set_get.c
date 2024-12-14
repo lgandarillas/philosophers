@@ -52,8 +52,3 @@ void	increase_long(t_mtx *mutex, long *value)
 	(*value)++;
 	solid_mutex(mutex, UNLOCK);
 }
-
-bool	simulation_finished(t_simulation *simulation)
-{
-	return (get_bool(&simulation->mutex, &simulation->end));
-}

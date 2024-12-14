@@ -24,7 +24,7 @@ static void	*one_philo_routine(void *arg)
 	set_long(&philo->mutex, &philo->last_meal_time, gettime_millis());
 	increase_long(&simulation->mutex, &simulation->num_threads_running);
 	print_action(TAKING_FIRST_FORK, simulation, philo);
-	while (!simulation_finished(simulation))
+	while (!get_bool(&simulation->mutex, &simulation->end))
 		usleep(200);
 	return (NULL);
 }
@@ -75,7 +75,7 @@ static void	*multiple_philo_routine(void *arg)
 	increase_long(&simulation->mutex, &simulation->num_threads_running);
 	if (philo->id % 2 == 0)
 		usleep(30e3);
-	while (!simulation_finished(simulation))
+	while (!get_bool(&simulation->mutex, &simulation->end))
 	{
 		if (philo->is_full)
 			break ;
