@@ -17,11 +17,8 @@
 # define RED		"\033[1;31m"
 # define GREEN		"\033[1;32m"
 # define GRAY		"\033[1;30m"
-# define YELLOW		"\033[1;33m"
 # define BLUE		"\033[1;34m"
-# define MAGENTA	"\033[1;35m"
 # define CIAN		"\033[1;36m"
-# define WHITE		"\033[1;37m"
 
 # define REQUIRED_ARGUMENTS 5
 # define OPTIONAL_ARGUMENTS 6
@@ -65,7 +62,7 @@ typedef enum e_threadop
 	DESTROY,
 }	t_threadop;
 
-typedef enum e_philo_status
+typedef enum e_philoaction
 {
 	EATING,
 	SLEEPING,
@@ -73,6 +70,6 @@ typedef enum e_philo_status
 	TAKING_FIRST_FORK,
 	TAKING_SECOND_FORK,
 	DYING,
-}	t_philo_status;
+}	t_philoaction;
 
 #endif

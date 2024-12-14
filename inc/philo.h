@@ -86,7 +86,7 @@ void	clean_simulation(t_simulation *simulation);
 
 void	run_simulation(t_simulation *simulation);
 
-void	write_action(t_philo_status status, t_simulation *simulation, \
+void	write_action(t_philoaction status, t_simulation *simulation, \
 	t_philo *philo);
 
 void	*supervisor(void *arg);
