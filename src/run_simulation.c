@@ -23,7 +23,7 @@ static void	*one_philo_routine(void *arg)
 		usleep(100);
 	set_long(&philo->mutex, &philo->last_meal_time, gettime_millis());
 	increase_long(&simulation->mutex, &simulation->num_threads_running);
-	write_action(TAKING_FIRST_FORK, simulation, philo);
+	print_action(TAKING_FIRST_FORK, simulation, philo);
 	while (!simulation_finished(simulation))
 		usleep(200);
 	return (NULL);
@@ -35,12 +35,12 @@ static void	eat(t_philo *philo)
 
 	simulation = philo->simulation;
 	solid_mutex(&philo->first_fork->mutex, LOCK);
-	write_action(TAKING_FIRST_FORK, simulation, philo);
+	print_action(TAKING_FIRST_FORK, simulation, philo);
 	solid_mutex(&philo->second_fork->mutex, LOCK);
-	write_action(TAKING_SECOND_FORK, simulation, philo);
+	print_action(TAKING_SECOND_FORK, simulation, philo);
 	set_long(&philo->mutex, &philo->last_meal_time, gettime_millis());
 	philo->meals_counter++;
-	write_action(EATING, simulation, philo);
+	print_action(EATING, simulation, philo);
 	usleep(simulation->time_to_eat * 1e3);
 	solid_mutex(&philo->first_fork->mutex, UNLOCK);
 	solid_mutex(&philo->second_fork->mutex, UNLOCK);
@@ -52,7 +52,7 @@ static void	think(t_philo *philo)
 	long			time_to_think;
 
 	simulation = philo->simulation;
-	write_action(THINKING, simulation, philo);
+	print_action(THINKING, simulation, philo);
 	if (simulation->num_philos % 2 == 0)
 		return ;
 	time_to_think = simulation->time_to_eat - \
@@ -80,7 +80,7 @@ static void	*multiple_philo_routine(void *arg)
 		if (philo->is_full)
 			break ;
 		eat(philo);
-		write_action(SLEEPING, simulation, philo);
+		print_action(SLEEPING, simulation, philo);
 		usleep(simulation->time_to_sleep * 1e3);
 		think(philo);
 	}

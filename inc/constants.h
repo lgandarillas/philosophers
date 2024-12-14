@@ -51,6 +51,7 @@ time_sleep [num_eat]\n"
 # define INVALID_GETTIME_OP	"[ERROR] : Invalid code for gettime_millis().\n"
 # define GETTIME_FAIL		"[ERROR] : gettime_millis() failed.\n"
 
+// Enumerations
 typedef enum e_threadop
 {
 	INIT,
@@ -62,7 +63,7 @@ typedef enum e_threadop
 	DESTROY,
 }	t_threadop;
 
-typedef enum e_philoaction
+typedef enum e_philaction
 {
 	EATING,
 	SLEEPING,
@@ -70,6 +71,6 @@ typedef enum e_philoaction
 	TAKING_FIRST_FORK,
 	TAKING_SECOND_FORK,
 	DYING,
-}	t_philoaction;
+}	t_philaction;
 
 #endif

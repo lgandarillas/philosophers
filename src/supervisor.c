@@ -79,7 +79,7 @@ void	*supervisor(void *arg)
 			if (philo_died(simulation->philos + i))
 			{
 				set_bool(&simulation->mutex, &simulation->end, true);
-				write_action(DYING, simulation, simulation->philos + i);
+				print_action(DYING, simulation, simulation->philos + i);
 				break ;
 			}
 		}

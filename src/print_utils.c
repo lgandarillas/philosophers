@@ -12,7 +12,7 @@
 
 #include "../inc/philo.h"
 
-void	write_action(t_philoaction status, t_simulation *simulation, \
+void	print_action(t_philaction status, t_simulation *simulation, \
 	t_philo *philo)
 {
 	long	elapsed;

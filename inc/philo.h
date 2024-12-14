@@ -13,6 +13,7 @@
 #ifndef PHILO_H
 # define PHILO_H
 
+// Standard library and system includes
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -22,10 +23,13 @@
 # include <limits.h>
 # include <errno.h>
 
+// Local includes
 # include "constants.h"
 
+// Type definitions
 typedef pthread_mutex_t	t_mtx;
 
+// Structures
 typedef struct s_forks
 {
 	t_mtx	mutex;
@@ -63,9 +67,16 @@ typedef struct s_simulation
 	pthread_t	pthread_supervisor;
 }	t_simulation;
 
+// Function declarations
 void	save_input(t_simulation *simulation, char **argv);
+void	setup_simulation(t_simulation *simulation);
+void	run_simulation(t_simulation *simulation);
+void	clean_simulation(t_simulation *simulation);
+
 void	print_error(const char *msg, bool exit);
 void	print_debug(const char *msg);
+void	print_action(t_philaction status, t_simulation *simulation, \
+	t_philo *philo);
 
 void	*solid_malloc(size_t bytes);
 void	solid_mutex(t_mtx *mutex, t_threadop threadop);
@@ -73,21 +84,12 @@ void	solid_thread(pthread_t *thread, void *(*thread_func)(void *), \
 	void *arg, t_threadop threadop);
 
 long	gettime_millis(void);
-
 bool	get_bool(t_mtx *mutex, bool *var);
 void	set_bool(t_mtx *mutex, bool *dest, bool value);
 long	get_long(t_mtx *mutex, long *var);
 void	set_long(t_mtx *mutex, long *dest, long value);
 void	increase_long(t_mtx *mutex, long *value);
 bool	simulation_finished(t_simulation *simulation);
-
-void	setup_simulation(t_simulation *simulation);
-void	clean_simulation(t_simulation *simulation);
-
-void	run_simulation(t_simulation *simulation);
-
-void	write_action(t_philoaction status, t_simulation *simulation, \
-	t_philo *philo);
 
 void	*supervisor(void *arg);
 

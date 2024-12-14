@@ -30,7 +30,7 @@ SRCS	= $(addprefix $(SRC_DIR),	\
 	clean_simulation.c				\
 	solid_utils.c					\
 	time_utils.c					\
-	set_and_get.c					\
+	set_get.c					\
 	run_simulation.c				\
 	supervisor.c					\
 	)
