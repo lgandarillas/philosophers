@@ -85,7 +85,7 @@ void	*supervisor(void *arg)
 	{
 		if (simulation->limit_meals > 0 && all_philos_full(simulation))
 		{
-			usleep(500);
+			usleep(100);
 			set_bool(&simulation->mutex, &simulation->end, true);
 			break ;
 		}
